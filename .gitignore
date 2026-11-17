@@ -1,0 +1,10 @@
+# Keep untouched source PDFs locally. Optimized web copies will be added separately.
+assets/pdfs/original/
+node_modules/
+tmp/
+scripts/
+css/styles.css
+本地预览.cmd
+.DS_Store
+Thumbs.db
+

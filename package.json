@@ -1,0 +1,16 @@
+{
+  "name": "gsx-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/site.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./css/site.css --watch"
+  },
+  "dependencies": {
+    "pdfjs-dist": "6.5.438"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目浏览 | Portfolio</title>
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body class="font-sans">
+    <main id="viewer-app" class="viewer-app">
+      <header class="viewer-toolbar">
+        <a class="viewer-button viewer-back" href="index.html" aria-label="返回作品集目录">← <span>作品集</span></a>
+        <h1 id="project-title" class="viewer-title">项目加载中</h1>
+        <div class="viewer-actions">
+          <button id="thumbnail-toggle" class="viewer-button thumbnail-toggle" type="button" aria-controls="thumbnail-sidebar" aria-expanded="false">缩略图</button>
+          <span class="page-counter"><strong id="page-current">1</strong> / <span id="page-total">--</span></span>
+          <button id="fullscreen-button" class="viewer-button" type="button">全屏</button>
+        </div>
+      </header>
+
+      <div class="viewer-layout">
+        <aside id="thumbnail-sidebar" class="thumbnail-sidebar" aria-label="页面缩略图">
+          <div id="thumbnail-list" class="thumbnail-list"></div>
+        </aside>
+
+        <section class="document-stage" aria-label="PDF 阅读区">
+          <button class="page-nav page-nav--previous" data-action="previous" type="button" aria-label="上一页">←</button>
+          <div id="loading-state" class="viewer-status" role="status">
+            <span>正在加载高清项目文件</span>
+            <progress id="loading-progress" max="1"></progress>
+          </div>
+          <div id="error-state" class="viewer-status viewer-error" hidden>
+            <p id="error-message">PDF 加载失败。</p>
+            <a href="index.html">返回作品集</a>
+          </div>
+          <div id="canvas-wrap" class="canvas-wrap" hidden aria-live="polite">
+            <canvas id="pdf-canvas"></canvas>
+          </div>
+          <button class="page-nav page-nav--next" data-action="next" type="button" aria-label="下一页">→</button>
+        </section>
+      </div>
+
+      <nav class="mobile-page-controls" aria-label="手机端翻页">
+        <button class="viewer-button" data-action="previous" type="button">← 上一页</button>
+        <span><strong id="mobile-page-current">使用顶部页码</strong></span>
+        <button class="viewer-button" data-action="next" type="button">下一页 →</button>
+      </nav>
+    </main>
+    <script>
+      if (window.location.protocol === "file:") {
+        document.querySelector("#project-title").textContent = "需要通过本地服务器打开";
+        document.querySelector("#loading-state").hidden = true;
+        const error = document.querySelector("#error-state");
+        error.hidden = false;
+        document.querySelector("#error-message").textContent =
+          "Edge 会阻止本地文件直接加载 PDF 模块。请关闭此页面，双击项目目录里的“本地预览.cmd”。";
+      } else {
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "js/viewer.mjs";
+        document.body.append(script);
+      }
+    </script>
+  </body>
+</html>
